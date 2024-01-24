@@ -1,0 +1,33 @@
+// Define pins for L294D
+const int in1Pin = 2;
+const int in2Pin = 4;
+const int enPin = 3;
+int i = 150;
+
+void setup() {
+  // serial baud
+  Serial.begin(9600);
+
+  // Set up pins
+
+  pinMode(in1Pin, OUTPUT);
+  pinMode(in2Pin, OUTPUT);
+  pinMode(enPin, OUTPUT);
+  digitalWrite(in1Pin, HIGH);
+  digitalWrite(in2Pin, LOW);
+}
+
+void loop() {
+  while(i <255){
+    analogWrite(enPin, i);
+    i=i+1;
+    Serial.print(i);
+    delay(100);
+  }
+  while (i>150){
+    analogWrite(enPin, i);
+    i=i-1;
+    Serial.print(i);
+    delay(100);
+  }
+}
