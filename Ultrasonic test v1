@@ -55,6 +55,8 @@ void loop() {
 
 // Function to set the motor speed
 void setMotorSpeed(int speed) {
+  digitalWrite(in1Pin, HIGH);
+  digitalWrite(in2Pin, LOW);
   analogWrite(enPin, speed);
 }
 
