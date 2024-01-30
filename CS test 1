@@ -1,0 +1,77 @@
+#define S0 8
+#define S1 9
+#define S2 10
+#define S3 11
+#define sensorOut 12
+
+int frequency = 0;
+int MaxValue = 1000;
+int FR = 0;
+int FG = 0;
+int FB = 0;
+int FW = 0;
+
+void setup() {
+  pinMode(S0, OUTPUT);
+  pinMode(S1, OUTPUT);
+  pinMode(S2, OUTPUT);
+  pinMode(S3, OUTPUT);
+  pinMode(sensorOut, INPUT);
+  
+  // Setting frequency-scaling to 20%
+  digitalWrite(S0,HIGH);
+  digitalWrite(S1,LOW);
+  
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Setting red filtered photodiodes to be read
+  digitalWrite(S2,LOW);
+  digitalWrite(S3,LOW);
+  // Reading the output frequency
+  frequency = pulseIn(sensorOut, LOW);
+  FR = map(frequency, 0, MaxValue,0,255);
+  // Printing the value on the serial monitor
+  Serial.print("R= ");//printing name
+  Serial.print(FR);//printing RED color frequency
+  Serial.print("  ");
+  delay(100);
+
+  // Setting Green filtered photodiodes to be read
+  digitalWrite(S2,HIGH);
+  digitalWrite(S3,HIGH);
+  // Reading the output frequency
+  frequency = pulseIn(sensorOut, LOW);
+  FG = map(frequency, 0, MaxValue,0,255);
+  // Printing the value on the serial monitor
+  Serial.print("G= ");//printing name
+  Serial.print(FG);//printing Green color frequency
+  Serial.print("  ");
+  delay(100);
+
+  // Setting Blue filtered photodiodes to be read
+  digitalWrite(S2,LOW);
+  digitalWrite(S3,HIGH);
+  // Reading the output frequency
+  FB = pulseIn(sensorOut, LOW);
+
+  // Printing the value on the serial monitor
+  Serial.print("B= ");//printing name
+  Serial.print(FB);//printing Blue color frequency
+  Serial.println("  ");
+  delay(100);
+
+    // Setting White filtered photodiodes to be read
+  digitalWrite(S2,HIGH);
+  digitalWrite(S3,LOW);
+  // Reading the output frequency
+  FW = pulseIn(sensorOut, LOW);
+
+  // Printing the value on the serial monitor
+  Serial.print("W= ");//printing name
+  Serial.print(FW);//printing White color frequency
+  Serial.println("  ");
+  delay(100);
+
+}
