@@ -6,7 +6,7 @@
 #define LED 13
 
 int frequency = 0;
-int MaxValue = 1000;
+int MaxValue = 500;
 int FR = 0;
 int FG = 0;
 int FB = 0;
@@ -20,9 +20,9 @@ void setup() {
   pinMode(sensorOut, INPUT);
   pinMode(LED, OUTPUT);
   // Setting frequency-scaling to 20%
-  digitalWrite(S0,HIGH);
-  digitalWrite(S1,LOW);
-  digitalWrite(LED,HIGH);
+  digitalWrite(S0,LOW);
+  digitalWrite(S1,HIGH);
+  analogWrite(LED, 255);
   Serial.begin(9600);
 }
 
@@ -32,10 +32,10 @@ void loop() {
   digitalWrite(S3,LOW);
   // Reading the output frequency
   frequency = pulseIn(sensorOut, LOW);
-//  FR = map(frequency, 0, MaxValue,255,0);
+  FR = map(frequency, 45, 273,255,0);
   // Printing the value on the serial monitor
   Serial.print("R= ");//printing name
-  Serial.print(frequency);//printing RED color frequency
+  Serial.print(FR);//printing RED color frequency
   Serial.print("  ");
   delay(200);
 
@@ -44,10 +44,10 @@ void loop() {
   digitalWrite(S3,HIGH);
   // Reading the output frequency
   frequency = pulseIn(sensorOut, LOW);
-//  FG = map(frequency, 0, MaxValue,255,0);
+  FG = map(frequency, 43, 328,255,0);
   // Printing the value on the serial monitor
   Serial.print("G= ");//printing name
-  Serial.print(frequency);//printing Green color frequency
+  Serial.print(FG);//printing Green color frequency
   Serial.print("  ");
   delay(200);
 
@@ -56,10 +56,10 @@ void loop() {
   digitalWrite(S3,HIGH);
   // Reading the output frequency
   frequency = pulseIn(sensorOut, LOW);
-//  FB = map(frequency, 0, MaxValue,255,0);
+  FB = map(frequency, 30, 243,255,0);
   // Printing the value on the serial monitor
   Serial.print("B= ");//printing name
-  Serial.print(frequency);//printing Blue color frequency
+  Serial.print(FB);//printing Blue color frequency
   Serial.println("  ");
   delay(200);
 }
